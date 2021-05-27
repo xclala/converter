@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<h1>温度转换器</h2>
+<h1>温度转换器</h1>
 <p>在下面的输入字段之一中插入一个数字：</p>
 <p><input id="c" onkeyup="convert('C')">摄氏度</p>
 <p><input id="f" onkeyup="convert('F')">华氏度</p> 
@@ -11,13 +11,15 @@ function convert(degree) {
   var x;
   if (degree == "C") {
     x = document.getElementById("c").value * 9 / 5 + 32;
-    document.getElementById("f").value = x;
+    document.getElementById("f").value = Math.round(x);
   } else {
     x = (document.getElementById("f").value -32) * 5 / 9;
-    document.getElementById("c").value = x;
+    document.getElementById("c").value = Math.round(x);
   }
 }
 </script>
-
+<style>
+  h1,p{text-align:center;}
+</style>
 </body>
 </html>
