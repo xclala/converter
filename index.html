@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>温度转换器</h2>
+<p>在下面的输入字段之一中插入一个数字：</p>
+<p><input id="c" onkeyup="convert('C')">摄氏度</p>
+<p><input id="f" onkeyup="convert('F')">华氏度</p> 
+<script>
+function convert(degree) {
+  var x;
+  if (degree == "C") {
+    x = document.getElementById("c").value * 9 / 5 + 32;
+    document.getElementById("f").value = x;
+  } else {
+    x = (document.getElementById("f").value -32) * 5 / 9;
+    document.getElementById("c").value = x;
+  }
+}
+</script>
+
+</body>
+</html>
