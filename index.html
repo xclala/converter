@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>温度转换器</title>
+  </head>
+<body>
+
+<h1>温度转换器</h1>
+<form>
+  <p>摄氏度<input id="c" onkeyup="convert('C')">℃</p>
+  <p>华氏度<input id="f" onkeyup="convert('F')">°F</p>
+  <p>开尔文<input id="k" onkeyup="convert('K')">K</p>
+  <div align="center"><button type="reset">清空</button></div>
+</form>
+<script>
+function convert(degree) {
+  var x;
+  var xx;
+  if (degree == "C") {
+    x = document.getElementById("c").value * 9 / 5 + 32;
+    xx = document.getElementById("c").value * 1 + 273.15
+    document.getElementById("f").value = Math.round(x);
+    document.getElementById("k").value = Math.round(xx);
+  } else if (degree == "F") {
+    x = (document.getElementById("f").value -32) * 5 / 9;
+    xx = x + 273.15;
+    document.getElementById("c").value = Math.round(x);
+    document.getElementById("k").value = Math.round(xx);
+  }else{
+    x = document.getElementById("k").value * 1 - 273.15;
+    xx = x * 9 / 5 + 32; 
+    document.getElementById("c").value = Math.round(x);
+    document.getElementById("f").value = Math.round(xx);}
+}
+</script>
+<style>
+  h1,p{text-align:center;}
+</style>
+</body>
+</html>
