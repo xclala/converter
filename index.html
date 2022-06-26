@@ -18,34 +18,83 @@
 	<p></p>
 	<a href="..">🔙<br></a>
 	<h1>温度转换器</h1>
-	<form>
-		<p><input id="c" onkeyup="convert('C')" placeholder="摄氏度" type="number">℃</p>
-		<p><input id="f" onkeyup="convert('F')" placeholder="华氏度" type="number">°F</p>
-		<p><input id="k" onkeyup="convert('K')" placeholder="开尔文" type="number">K</p>
+	<form align="center">
+		<select id="selectoption" onchange="onselectoption()">
+			<option value="temperture">温度</option>
+			<option value="heavy">重量</option>
+		</select>
+		<input id="c" placeholder="摄氏度" type="number">
+		<input id="f" placeholder="华氏度" type="number">
+		<input id="k" placeholder="开尔文" type="number">
 		<div align="center"><button type="reset">清空</button></div>
-	</form>
-	<script>
-		function convert(degree) {
-			let x;
-			let xx;
-			if (degree == "C") {
-				x = document.getElementById("c").value * 9 / 5 + 32;
-				xx = document.getElementById("c").value * 1 + 273.15
-				document.getElementById("f").value = Math.round(x);
-				document.getElementById("k").value = Math.round(xx);
-			} else if (degree == "F") {
-				x = (document.getElementById("f").value - 32) * 5 / 9;
-				xx = x + 273.15;
-				document.getElementById("c").value = Math.round(x);
-				document.getElementById("k").value = Math.round(xx);
-			} else {
-				x = document.getElementById("k").value * 1 - 273.15;
-				xx = x * 9 / 5 + 32;
-				document.getElementById("c").value = Math.round(x);
-				document.getElementById("f").value = Math.round(xx);
+		<script>
+			document.getElementById("c").onkeyup = convert_temperture('C')
+			document.getElementById("f").onkeyup = convert_temperture('F')
+			document.getElementById("k").onkeyup = convert_temperture('K')
+			function onselectoption() {
+				let index = document.getElementById("selectoption").selectedIndex
+				let selectedoption = document.getElementById("selectoption").options[index].value
+				switch (selectedoption) {
+					case "temperture":
+						document.getElementById("c").onkeyup = convert_temperture('C')
+						document.getElementById("c").placeholder = "摄氏度"
+						document.getElementById("f").onkeyup = convert_temperture('F')
+						document.getElementById("f").placeholder = "华氏度"
+						document.getElementById("k").onkeyup = convert_temperture('K')
+						document.getElementById("k").placeholder = "开尔文"
+						break
+					case "heavy":
+						document.getElementById("c").onkeyup = convert_heavy('K')
+						document.getElementById("c").placeholder = "千克"
+						document.getElementById("f").onkeyup = convert_heavy('P')
+						document.getElementById("f").placeholder = "磅"
+						document.getElementById("k").onkeyup = convert_heavy('O')
+						document.getElementById("k").placeholder = "盎司"
+						break
+				}
 			}
-		}
-	</script>
+			function convert_temperture(degree) {
+				let x;
+				let xx;
+				if (degree == "C") {
+					x = document.getElementById("c").value * 9 / 5 + 32;
+					xx = document.getElementById("c").value * 1 + 273.15
+					document.getElementById("f").value = Math.round(x);
+					document.getElementById("k").value = Math.round(xx);
+				} else if (degree == "F") {
+					x = (document.getElementById("f").value - 32) * 5 / 9;
+					xx = x + 273.15;
+					document.getElementById("c").value = Math.round(x);
+					document.getElementById("k").value = Math.round(xx);
+				} else {
+					x = document.getElementById("k").value * 1 - 273.15;
+					xx = x * 9 / 5 + 32;
+					document.getElementById("c").value = Math.round(x);
+					document.getElementById("f").value = Math.round(xx);
+				}
+			}
+			function convert_heavy(degree) {
+				let x;
+				let xx;
+				if (degree == "K") {
+					x = document.getElementById("c").value * 2.20;
+					xx = document.getElementById("c").value * 35.27;
+					document.getElementById("f").value = Math.round(x);
+					document.getElementById("k").value = Math.round(xx);
+				} else if (degree == "P") {
+					x = document.getElementById("f").value * 0.45
+					xx = document.getElementById("f").value * 16
+					document.getElementById("c").value = Math.round(x);
+					document.getElementById("k").value = Math.round(xx);
+				} else {
+					x = document.getElementById("k").value * 0.02;
+					xx = x / 16
+					document.getElementById("c").value = Math.round(x);
+					document.getElementById("f").value = Math.round(xx);
+				}
+			}
+		</script>
+	</form>
 	<style>
 		@media(prefers-color-scheme:dark) {
 			body {
