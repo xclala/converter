@@ -3,8 +3,8 @@
 
 <head>
 	<meta charset='UTF-8'>
-	<title>温度转换器</title>
-	<meta name="description" content="温度转换器">
+	<title>单位转换器</title>
+	<meta name="description" content="单位转换器">
 	<meta name="author" content="邢栋">
 	<link rel="icon" type="image/x-ico" href="../favicon.ico">
 </head>
@@ -17,80 +17,77 @@
 	<p></p>
 	<p></p>
 	<a href="..">🔙<br></a>
-	<h1>温度转换器</h1>
+	<h1>单位转换器</h1>
 	<form align="center">
 		<select id="selectoption" onchange="onselectoption()">
 			<option value="temperture">温度</option>
 			<option value="heavy">重量</option>
 		</select>
-		<input id="c" placeholder="摄氏度" type="number">
-		<input id="f" placeholder="华氏度" type="number">
-		<input id="k" placeholder="开尔文" type="number">
+		<input id="x" onkeyup="convert_temperture('C')" placeholder="摄氏度" type="number">
+		<input id="y" onkeyup="convert_temperture('F')" placeholder="华氏度" type="number">
+		<input id="z" onkeyup="convert_temperture('K')" placeholder="开尔文" type="number">
 		<div align="center"><button type="reset">清空</button></div>
 		<script>
-			document.getElementById("c").onkeyup = convert_temperture('C')
-			document.getElementById("f").onkeyup = convert_temperture('F')
-			document.getElementById("k").onkeyup = convert_temperture('K')
 			function onselectoption() {
 				let index = document.getElementById("selectoption").selectedIndex
 				let selectedoption = document.getElementById("selectoption").options[index].value
 				switch (selectedoption) {
 					case "temperture":
-						document.getElementById("c").onkeyup = convert_temperture('C')
-						document.getElementById("c").placeholder = "摄氏度"
-						document.getElementById("f").onkeyup = convert_temperture('F')
-						document.getElementById("f").placeholder = "华氏度"
-						document.getElementById("k").onkeyup = convert_temperture('K')
-						document.getElementById("k").placeholder = "开尔文"
+						document.getElementById("x").onkeyup = function () { convert_temperture('C') }
+						document.getElementById("x").placeholder = "摄氏度"
+						document.getElementById("y").onkeyup = function () { convert_temperture('F') }
+						document.getElementById("y").placeholder = "华氏度"
+						document.getElementById("z").onkeyup = function () { convert_temperture('K') }
+						document.getElementById("z").placeholder = "开尔文"
 						break
 					case "heavy":
-						document.getElementById("c").onkeyup = convert_heavy('K')
-						document.getElementById("c").placeholder = "千克"
-						document.getElementById("f").onkeyup = convert_heavy('P')
-						document.getElementById("f").placeholder = "磅"
-						document.getElementById("k").onkeyup = convert_heavy('O')
-						document.getElementById("k").placeholder = "盎司"
+						document.getElementById("x").onkeyup = function () { convert_heavy('K') }
+						document.getElementById("x").placeholder = "千克"
+						document.getElementById("y").onkeyup = function () { convert_heavy('P') }
+						document.getElementById("y").placeholder = "磅"
+						document.getElementById("z").onkeyup = function () { convert_heavy('O') }
+						document.getElementById("z").placeholder = "盎司"
 						break
 				}
 			}
 			function convert_temperture(degree) {
-				let x;
-				let xx;
+				let temp1;
+				let temp2;
 				if (degree == "C") {
-					x = document.getElementById("c").value * 9 / 5 + 32;
-					xx = document.getElementById("c").value * 1 + 273.15
-					document.getElementById("f").value = Math.round(x);
-					document.getElementById("k").value = Math.round(xx);
+					temp1 = document.getElementById("x").value * 9 / 5 + 32;
+					temp2 = document.getElementById("x").value * 1 + 273.15
+					document.getElementById("y").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				} else if (degree == "F") {
-					x = (document.getElementById("f").value - 32) * 5 / 9;
-					xx = x + 273.15;
-					document.getElementById("c").value = Math.round(x);
-					document.getElementById("k").value = Math.round(xx);
+					temp1 = (document.getElementById("y").value - 32) * 5 / 9;
+					temp2 = temp1 + 273.15;
+					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				} else {
-					x = document.getElementById("k").value * 1 - 273.15;
-					xx = x * 9 / 5 + 32;
-					document.getElementById("c").value = Math.round(x);
-					document.getElementById("f").value = Math.round(xx);
+					temp1 = document.getElementById("z").value * 1 - 273.15;
+					temp2 = temp1 * 9 / 5 + 32;
+					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("y").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				}
 			}
 			function convert_heavy(degree) {
-				let x;
-				let xx;
+				let temp1;
+				let temp2;
 				if (degree == "K") {
-					x = document.getElementById("c").value * 2.20;
-					xx = document.getElementById("c").value * 35.27;
-					document.getElementById("f").value = Math.round(x);
-					document.getElementById("k").value = Math.round(xx);
+					temp1 = document.getElementById("x").value * 2.204623;
+					temp2 = temp1 * 16;
+					document.getElementById("y").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				} else if (degree == "P") {
-					x = document.getElementById("f").value * 0.45
-					xx = document.getElementById("f").value * 16
-					document.getElementById("c").value = Math.round(x);
-					document.getElementById("k").value = Math.round(xx);
+					temp1 = document.getElementById("y").value / 2.204623
+					temp2 = document.getElementById("y").value * 16
+					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				} else {
-					x = document.getElementById("k").value * 0.02;
-					xx = x / 16
-					document.getElementById("c").value = Math.round(x);
-					document.getElementById("f").value = Math.round(xx);
+					temp1 = document.getElementById("z").value / 16 / 2.204623;
+					temp2 = temp1 / 16
+					document.getElementById("x").value = Math.round(temp1*100)/100;//四舍五入到百分位
+					document.getElementById("y").value = Math.round(temp2*100)/100;//四舍五入到百分位
 				}
 			}
 		</script>
