@@ -54,17 +54,17 @@
 				let temp1;
 				let temp2;
 				if (degree == "C") {
-					temp1 = document.getElementById("x").value * 9 / 5 + 32;
-					temp2 = document.getElementById("x").value * 1 + 273.15
+					temp1 = Math.abs(document.getElementById("x").value) * 9 / 5 + 32;
+					temp2 = Math.abs(document.getElementById("x").value) + 273.15
 					document.getElementById("y").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
 					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				} else if (degree == "F") {
-					temp1 = (document.getElementById("y").value - 32) * 5 / 9;
+					temp1 = (Math.abs(document.getElementById("y").valu) - 32) * 5 / 9;
 					temp2 = temp1 + 273.15;
 					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
 					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				} else {
-					temp1 = document.getElementById("z").value * 1 - 273.15;
+					temp1 = Math.abs(document.getElementById("z").value) - 273.15;
 					temp2 = temp1 * 9 / 5 + 32;
 					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
 					document.getElementById("y").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
@@ -74,20 +74,20 @@
 				let temp1;
 				let temp2;
 				if (degree == "K") {
-					temp1 = document.getElementById("x").value * 2.204623;
+					temp1 = Math.abs(document.getElementById("x").value) * 2.204623;
 					temp2 = temp1 * 16;
 					document.getElementById("y").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
 					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				} else if (degree == "P") {
-					temp1 = document.getElementById("y").value / 2.204623
-					temp2 = document.getElementById("y").value * 16
+					temp1 = Math.abs(document.getElementById("y").value) / 2.204623
+					temp2 = Math.abs(document.getElementById("y").value) * 16
 					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
 					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				} else {
-					temp1 = document.getElementById("z").value / 16 / 2.204623;
+					temp1 = Math.abs(document.getElementById("z").value) / 16 / 2.204623;
 					temp2 = temp1 / 16
-					document.getElementById("x").value = Math.round(temp1*100)/100;//四舍五入到百分位
-					document.getElementById("y").value = Math.round(temp2*100)/100;//四舍五入到百分位
+					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("y").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				}
 			}
 		</script>
