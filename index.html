@@ -23,9 +23,16 @@
 			<option value="temperture">温度</option>
 			<option value="heavy">重量</option>
 		</select>
+		<p></p>
 		<input id="x" onkeyup="convert_temperture('C')" placeholder="摄氏度" type="number">
+		<label id="m1">°C</label>
+		<p></p>
 		<input id="y" onkeyup="convert_temperture('F')" placeholder="华氏度" type="number">
+		<label id="m2">°F</label>
+		<p></p>
 		<input id="z" onkeyup="convert_temperture('K')" placeholder="开尔文" type="number">
+		<label id="m3">K</label>
+		<p></p>
 		<div align="center"><button type="reset">清空</button></div>
 		<script>
 			function onselectoption() {
@@ -39,6 +46,9 @@
 						document.getElementById("y").placeholder = "华氏度"
 						document.getElementById("z").onkeyup = function () { convert_temperture('K') }
 						document.getElementById("z").placeholder = "开尔文"
+						document.getElementById("m1").innerHTML = "°C"
+						document.getElementById("m2").innerHTML = "°F"
+						document.getElementById("m3").innerHTML = "K"
 						break
 					case "heavy":
 						document.getElementById("x").onkeyup = function () { convert_heavy('K') }
@@ -47,6 +57,9 @@
 						document.getElementById("y").placeholder = "磅"
 						document.getElementById("z").onkeyup = function () { convert_heavy('O') }
 						document.getElementById("z").placeholder = "盎司"
+						document.getElementById("m1").innerHTML = "千克"
+						document.getElementById("m2").innerHTML = "磅"
+						document.getElementById("m3").innerHTML = "盎司"
 						break
 				}
 			}
@@ -99,7 +112,7 @@
 			}
 
 			h1,
-			p {
+			label {
 				color: white;
 			}
 		}
@@ -110,13 +123,13 @@
 			}
 
 			h1,
-			p {
+			label {
 				color: black;
 			}
 		}
 
 		h1,
-		p {
+		label {
 			text-align: center;
 		}
 
