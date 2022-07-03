@@ -23,6 +23,7 @@
 			<option value="temperture">温度</option>
 			<option value="heavy">重量</option>
 			<option value="area">面积</option>
+			<option value="power">功率</option>
 		</select>
 		<p></p>
 		<input id="x" onkeyup="convert_temperture('C')" placeholder="摄氏度" type="number">
@@ -73,6 +74,17 @@
 						document.getElementById("m2").innerHTML = "公顷"
 						document.getElementById("m3").innerHTML = "英亩"
 						break
+					case "power":
+						document.getElementById("x").onkeyup = function () { convert_power('KW') }
+						document.getElementById("x").placeholder = "千瓦"
+						document.getElementById("y").onkeyup = function () { convert_power('W') }
+						document.getElementById("y").placeholder = "瓦特"
+						document.getElementById("z").onkeyup = function () { convert_power('HP') }
+						document.getElementById("z").placeholder = "马力"
+						document.getElementById("m1").innerHTML = "千瓦"
+						document.getElementById("m2").innerHTML = "瓦特"
+						document.getElementById("m3").innerHTML = "马力"
+						break
 				}
 			}
 			function convert_temperture(degree) {
@@ -111,6 +123,27 @@
 				} else {
 					temp1 = Math.abs(document.getElementById("z").value) / 16 / 2.204623;
 					temp2 = temp1 / 16
+					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("y").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
+				}
+			}
+
+			function convert_power(degree) {
+				let temp1;
+				let temp2;
+				if (degree == "KW") {
+					temp1 = Math.abs(document.getElementById("x").value) * 1000;
+					temp2 = temp1 * 0.001341;
+					document.getElementById("y").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
+				} else if (degree == "W") {
+					temp1 = Math.abs(document.getElementById("y").value) / 1000;
+					temp2 = temp1 * 1.341022;
+					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
+				} else {
+					temp1 = Math.abs(document.getElementById("z").value) / 1000 / 0.001341;
+					temp2 = temp1 * 0.001341
 					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
 					document.getElementById("y").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				}
