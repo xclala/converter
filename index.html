@@ -29,6 +29,7 @@
 			<option value="heavy">重量</option>
 			<option value="area">面积</option>
 			<option value="power">功率</option>
+			<option value="pressure">压强</option>
 		</select>
 		<p></p>
 		<input id="x" onkeyup="convert_temperture('C')" placeholder="摄氏度" type="number">
@@ -90,6 +91,16 @@
 						document.getElementById("m2").innerHTML = "瓦特"
 						document.getElementById("m3").innerHTML = "马力"
 						break
+					case "pressure":
+						document.getElementById("x").onkeyup = function () { convert_pressure('P') }
+						document.getElementById("x").placeholder = "帕斯卡"
+						document.getElementById("y").onkeyup = function () { convert_pressure('MMHG') }
+						document.getElementById("y").placeholder = "毫米汞柱"
+						document.getElementById("z").onkeyup = function () { convert_pressure('AP') }
+						document.getElementById("z").placeholder = "大气压"
+						document.getElementById("m1").innerHTML = "帕斯卡"
+						document.getElementById("m2").innerHTML = "毫米汞柱"
+						document.getElementById("m3").innerHTML = "大气压"
 				}
 			}
 			function convert_temperture(degree) {
@@ -174,6 +185,27 @@
 					document.getElementById("y").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
 				}
 			}
+
+			function convert_pressure(degree) {
+				let temp1;
+				let temp2;
+				if (degree == "P") {
+					temp1 = Math.abs(document.getElementById("x").value) * 0.007502;
+					temp2 = temp1 * 0.00001;
+					document.getElementById("y").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
+				} else if (degree == "MMHG") {
+					temp1 = Math.abs(document.getElementById("y").value) / 0.007502;
+					temp2 = temp1 * 0.007502 * 0.00001;
+					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("z").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
+				} else {
+					temp1 = Math.abs(document.getElementById("z").value) / 0.007502 / 0.00001;
+					temp2 = temp1 * 0.00001
+					document.getElementById("x").value = Math.round(temp1 * 100) / 100;//四舍五入到百分位
+					document.getElementById("y").value = Math.round(temp2 * 100) / 100;//四舍五入到百分位
+				}
+			}
 		</script>
 	</form>
 	<style>
@@ -186,6 +218,10 @@
 			label {
 				color: white;
 			}
+
+			a {
+				color: orangered;
+			}
 		}
 
 		@media(prefers-color-scheme:light) {
@@ -196,6 +232,10 @@
 			h1,
 			label {
 				color: black;
+			}
+
+			a {
+				color: blue;
 			}
 		}
 
@@ -222,13 +262,14 @@
 		window.onload = function () {
 			const BACKGROUNDCOLOR = ['#111114', 'whitesmoke']
 			const TEXTCOLOR = ['white', 'black']
+			const LINKCOLOR = ['orangered', 'blue']
 			let c = 0
 			document.getElementsByTagName("h1")[0].onclick = function () {
 				document.body.style.backgroundColor = BACKGROUNDCOLOR[c % 2]
 				document.getElementsByTagName("h1")[0].style.color = TEXTCOLOR[c % 2]
-				let x = document.getElementsByTagName("p")
+				let x = document.getElementsByTagName("a")
 				for (let i = 0; i < x.length; i++) {
-					x[i].style.color = TEXTCOLOR[c % 2]
+					x[i].style.color = LINKCOLOR[c % 2]
 				}
 				c++
 			}
